@@ -1,5 +1,5 @@
-// client/src/pages/Login.jsx
-import { useState } from "react";
+import React from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
@@ -22,10 +22,10 @@ export default function Login() {
 
       if (res.ok) {
         localStorage.setItem("token", data.token);
-        alert("Login successful ✅");
+        alert("Login successful");
         navigate("/dashboard"); // aage redirect
       } else {
-        alert(data.message || "Login failed ❌");
+        alert(data.message || "Login failed ");
       }
     } catch (err) {
       console.error(err);
@@ -63,6 +63,9 @@ export default function Login() {
         >
           Login
         </button>
+        <p className="text-sm mt-4 text-center">
+  Don't have an account? <a href="/signup" className="text-blue-600 underline">Signup</a>
+</p>
       </form>
     </div>
   );

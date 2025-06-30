@@ -3,8 +3,15 @@ import express from "express";
 import verifyToken from "../middlewares/verifyToken.js";
 import User from "../models/user.js";
 
-const router = express.Router();
 
+const router = express.Router();
+router.get("/", (req, res) => {
+  res.json({
+    name: "Mohit Khatri",
+    age: 19,
+    email: "mohit@example.com"
+  });
+});
 // Protected route
 router.get("/", verifyToken, async (req, res) => {
   try {
@@ -17,5 +24,8 @@ router.get("/", verifyToken, async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+// router.get('/profile', verifyToken, (req, res) => {
+//   res.json({ username: req.user.username, email: req.user.email });
+// });
 
 export default router;

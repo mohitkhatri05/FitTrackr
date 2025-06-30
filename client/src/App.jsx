@@ -1,20 +1,33 @@
-import { useState } from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import React from 'react'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Login from './pages/login.jsx'
+import Signup from './pages/signup.jsx'
+import Profile from './pages/profile.jsx'
+import ProtectedRoute from './components/ProtectedRoute.jsx'
+
 
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
- <Router>
+    <BrowserRouter>
+       
       <Routes>
+        <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
-        {/* baaki routes yaha */}
+        <Route path="/signup" element={<Signup />} />
+        
+        {/* ✅ Protected Profile Route */}
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
-    </Router>
-    </>
+    
+    </BrowserRouter>
   )
 }
 
