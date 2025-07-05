@@ -1,12 +1,14 @@
-// index.js
+// ✅ index.js
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
 
+
 // Routes
 import authRoutes from "./routes/auth.js";
 import profileRoutes from "./routes/profile.js";
+
 
 dotenv.config();
 
@@ -19,6 +21,7 @@ app.use(express.json());
 // Routes
 app.use("/api/auth", authRoutes); 
 app.use("/api/profile", profileRoutes); 
+
 
 // Test route
 app.get("/", (req, res) => {

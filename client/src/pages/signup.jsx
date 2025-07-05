@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 function Signup() {
   const [formData, setFormData] = useState({
     username: "",
@@ -31,9 +30,14 @@ function Signup() {
       const data = await res.json();
 
       if (res.ok) {
+        // ✅ Save token and userId if returned
         localStorage.setItem("token", data.token);
+        if (data.user && data.user._id) {
+          localStorage.setItem("userId", data.user._id);
+        }
+
         alert("Signup successful ✅");
-        navigate("/login");
+        navigate("/complete-profile"); // ⬅️ go straight to profile info
       } else {
         alert(data.message || "Signup failed ❌");
       }

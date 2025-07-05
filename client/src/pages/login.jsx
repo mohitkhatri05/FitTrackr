@@ -1,6 +1,7 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -22,10 +23,15 @@ export default function Login() {
 
       if (res.ok) {
         localStorage.setItem("token", data.token);
+
+        if (data.user && data.user._id) {
+          localStorage.setItem("userId", data.user._id);
+        }
+
         alert("Login successful");
-        navigate("/dashboard"); // aage redirect
+        navigate("/complete-profile");
       } else {
-        alert(data.message || "Login failed ");
+        alert(data.message || "Login failed");
       }
     } catch (err) {
       console.error(err);
@@ -64,8 +70,11 @@ export default function Login() {
           Login
         </button>
         <p className="text-sm mt-4 text-center">
-  Don't have an account? <a href="/signup" className="text-blue-600 underline">Signup</a>
-</p>
+          Don't have an account?{" "}
+          <a href="/signup" className="text-blue-600 underline">
+            Signup
+          </a>
+        </p>
       </form>
     </div>
   );
